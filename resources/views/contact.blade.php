@@ -1,59 +1,7 @@
 @extends('front-layout')
 @section('content')
-<!-- Hero Section Begin -->
-<section class="hero">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3">
-                <div class="hero__categories">
-                    <div class="hero__categories__all">
-                        <i class="fa fa-bars"></i>
-                        <span>Tous les catégories</span>
-                    </div>
-                    <ul>
-                        <li><a href="#">Photovoltaîque</a></li>
-                        <li><a href="#">Matériel électriques</a></li>
-                        <li><a href="#">Boites et Connecteurs</a></li>
-                        <li><a href="#">Coffret de communication</a></li>
-                        <li><a href="#">Eclairage & Ampoules</a></li>
-                        <li><a href="#">Butter & Eggs</a></li>
-                        <li><a href="#">Fastfood</a></li>
-                        <li><a href="#">Fresh Onion</a></li>
-                        <li><a href="#">Papayaya & Crisps</a></li>
-                        <li><a href="#">Oatmeal</a></li>
-                        <li><a href="#">Fresh Bananas</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-9">
-                <div class="hero__search">
-                    <div class="hero__search__form">
-                        <form action="#">
-                            <div class="hero__search__categories">
-                                Tout les catégories
-                                <span class="arrow_carrot-down"></span>
-                            </div>
-                            <input type="text" placeholder="De quoi aviez-vous besoin?">
-                            <button type="submit" class="site-btn">Rechercher</button>
-                        </form>
-                    </div>
-                </div>
-                <div class="hero__item set-bg" data-setbg="{{asset('front-office/img/hero/banner-1.jpg') }}">
-                    <div class="hero__text">
-                        <span>T</span>
-                        <h2>Vegetable <br />100% Organic</h2>
-                        <p>Free Pickup and Delivery Available</p>
-                        <a href="#" class="primary-btn">SHOP NOW</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Hero Section End -->
-
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+    <section class="breadcrumb-section set-bg" data-setbg="{{ asset('front-office/img/breadcrumb.jpg') }}">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -148,5 +96,4 @@
         </div>
     </div>
     <!-- Contact Form End -->
-
-    
+@endsection

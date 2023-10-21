@@ -7,7 +7,7 @@
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ogani | Template</title>
+    <title>Electro Shop Bénin</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -46,31 +46,31 @@
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
                 <img src="{{ asset('front-office/img/language.png') }}" alt="">
-                <div>English</div>
+                <div>Français</div>
                 <span class="arrow_carrot-down"></span>
                 <ul>
-                    <li><a href="#">Spanis</a></li>
-                    <li><a href="#">English</a></li>
+                    <li><a href="#">Français</a></li>
+                    <li><a href="#">Anglais</a></li>
                 </ul>
             </div>
             <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> Login</a>
+                <a href="#"><i class="fa fa-user"></i>Se connecter</a>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="./index.html">Home</a></li>
-                <li><a href="./shop-grid.html">Shop</a></li>
-                <li><a href="#">Pages</a>
+                <li class="{{ Route::currentRouteName() == 'home' ? 'active' : '' }}"><a href="{{ route('home') }}">Acceuil</a></li>
+                <li class="{{ Route::currentRouteName() == 'shop' ? 'active' : '' }}"><a href="{{ route('shop') }}">Boutique</a></li>
+                <li class="{{ (Route::currentRouteName() == 'shop-details' || Route::currentRouteName() == 'shoping-cart' || Route::currentRouteName() == 'checkout' || Route::currentRouteName() == 'blog-details') ? 'active' : '' }}"><a href="#">Pages</a>
                     <ul class="header__menu__dropdown">
-                        <li><a href="./shop-details.html">Shop Details</a></li>
-                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                        <li><a href="./checkout.html">Check Out</a></li>
-                        <li><a href="./blog-details.html">Blog Details</a></li>
+                        <li class="{{ Route::currentRouteName() == 'shop-details' ? 'active' : '' }}"><a href="{{ route('shop-details') }}">Détails Produit</a></li>
+                        <li class="{{ Route::currentRouteName() == 'shoping-cart' ? 'active' : '' }}"><a href="{{ route('shoping-cart') }}">Panier</a></li>
+                        <li class="{{ Route::currentRouteName() == 'checkout' ? 'active' : '' }}"><a href="{{ route('checkout') }}">Paiement</a></li>
+                        <li class="{{ Route::currentRouteName() == 'blog-details' ? 'active' : '' }}"><a href="{{ route('blog-details') }}">Blog Details</a></li>
                     </ul>
                 </li>
-                <li><a href="./blog.html">Blog</a></li>
-                <li><a href="./contact.html">Contact</a></li>
+                <li class="{{ Route::currentRouteName() == 'blog' ? 'active' : '' }}"><a href="{{ route('blog') }}">Blog</a></li>
+                <li class="{{ Route::currentRouteName() == 'contact' ? 'active' : '' }}"><a href="{{ route('contact') }}">Contact</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -112,11 +112,11 @@
                             </div>
                             <div class="header__top__right__language">
                                 <img src="{{ asset('front-office/img/language.png') }}" alt="">
-                                <div>English</div>
+                                <div>Français</div>
                                 <span class="arrow_carrot-down"></span>
                                 <ul>
-                                    <li><a href="#">Spanis</a></li>
-                                    <li><a href="#">English</a></li>
+                                    <li><a href="#">Français</a></li>
+                                    <li><a href="#">Anglais</a></li>
                                 </ul>
                             </div>
                             <div class="header__top__right__auth">
@@ -131,24 +131,24 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="{{ asset('front-office/img/logo.png') }}" alt=""></a>
+                        <a href="{{ route('home') }}"><img src="{{ asset('front-office/img/logo.png') }}" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Home</a></li>
-                            <li><a href="./shop-grid.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
+                            <li class="{{ Route::currentRouteName() == 'home' ? 'active' : '' }}"><a href="{{ route('home') }}">Acceuil</a></li>
+                            <li class="{{ Route::currentRouteName() == 'shop' ? 'active' : '' }}"><a href="{{ route('shop') }}">Boutique</a></li>
+                            <li class="{{ (Route::currentRouteName() == 'shop-details' || Route::currentRouteName() == 'shoping-cart' || Route::currentRouteName() == 'checkout' || Route::currentRouteName() == 'blog-details') ? 'active' : '' }}"><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                    <li class="{{ Route::currentRouteName() == 'shop-details' ? 'active' : '' }}"><a href="{{ route('shop-details') }}">Détails Produit</a></li>
+                                    <li class="{{ Route::currentRouteName() == 'shoping-cart' ? 'active' : '' }}"><a href="{{ route('shoping-cart') }}">Panier</a></li>
+                                    <li class="{{ Route::currentRouteName() == 'checkout' ? 'active' : '' }}"><a href="{{ route('checkout') }}">Paiement</a></li>
+                                    <li class="{{ Route::currentRouteName() == 'blog-details' ? 'active' : '' }}"><a href="{{ route('blog-details') }}">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
+                            <li class="{{ Route::currentRouteName() == 'blog' ? 'active' : '' }}"><a href="{{ route('blog') }}">Blog</a></li>
+                            <li class="{{ Route::currentRouteName() == 'contact' ? 'active' : '' }}"><a href="{{ route('contact') }}">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -178,7 +178,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="./index.html"><img src="{{ asset('front-office/img/logo.png') }}" alt=""></a>
+                            <a href="{{ route('home') }}"><img src="{{ asset('front-office/img/logo.png') }}" alt=""></a>
                         </div>
                         <ul>
                             <li>Address: 60-49 Road 11378 New York</li>

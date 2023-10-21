@@ -40,7 +40,7 @@
                 </div>
                 <div class="hero__item set-bg" data-setbg="{{asset('front-office/img/hero/banner-1.jpg') }}">
                     <div class="hero__text">
-                        <span>T</span>
+                        <span>Publicité</span>
                         <h2>Vegetable <br />100% Organic</h2>
                         <p>Free Pickup and Delivery Available</p>
                         <a href="#" class="primary-btn">SHOP NOW</a>
