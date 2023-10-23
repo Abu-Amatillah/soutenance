@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\City;
+use App\Models\Country;
+use App\Models\Role;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,13 +15,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
+            $table->uuid('id');
+            $table->string('last_name');
+            $table->string('first_name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('telephone')->unique();
+            $table->foreignIdFor(Country::class)->restrictOnUpdate()->restrictOnDelete();
+            $table->foreignIdFor(City::class)->restrictOnUpdate()->restrictOnDelete();
+            $table->string('address');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->foreignIdFor(Role::class)->restrictOnUpdate()->restrictOnDelete();
         });
     }
 
@@ -27,6 +36,9 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('users', function ($table) {
+            $table->dropForeign(['country_id', 'city_id']);
+        });
         Schema::dropIfExists('users');
     }
 };
