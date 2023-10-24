@@ -8,31 +8,24 @@
                 <div class="hero__categories">
                     <div class="hero__categories__all">
                         <i class="fa fa-bars"></i>
-                        <span>Tous les catégories</span>
+                        <span>Toutes les catégories</span>
                     </div>
-                    <ul>
-                        <li><a href="#">Photovoltaîque</a></li>
-                        <li><a href="#">Matériel électriques</a></li>
-                        <li><a href="#">Boites et Connecteurs</a></li>
-                        <li><a href="#">Coffret de communication</a></li>
-                        <li><a href="#">Eclairage & Ampoules</a></li>
-                        <li><a href="#">Butter & Eggs</a></li>
-                        <li><a href="#">Fastfood</a></li>
-                        <li><a href="#">Fresh Onion</a></li>
-                        <li><a href="#">Papayaya & Crisps</a></li>
-                        <li><a href="#">Oatmeal</a></li>
-                        <li><a href="#">Fresh Bananas</a></li>
-                    </ul>
+                    <div class="categories__content">
+                        <input id="search-category" class="form-control mt-2 mb-3" type="search" placeholder="Rechercher une catégorie">
+                        <ul>
+                            @foreach ($categories as $category)
+                                <li>
+                                    <a href="{{ route('shop', ['category_id' => $category->id]) }}">{{ $category->name }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-9">
                 <div class="hero__search">
-                    <div class="hero__search__form">
+                    <div class="hero__search__form w-100">
                         <form action="#">
-                            <div class="hero__search__categories">
-                                Tout les catégories
-                                <span class="arrow_carrot-down"></span>
-                            </div>
                             <input type="text" placeholder="De quoi aviez-vous besoin?">
                             <button type="submit" class="site-btn">Rechercher</button>
                         </form>
@@ -57,38 +50,20 @@
     <div class="container">
         <div class="row">
             <div class="categories__slider owl-carousel">
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="{{ asset('front-office/img/categories/cat-1.jpg') }}">
-                        <h5><a href="#">Fresh Fruit</a></h5>
+                @foreach ($categories as $category)
+                    <div class="col-lg-3">
+                        <div class="categories__item set-bg" data-setbg="{{ $category->image }}">
+                            <h5><a href="{{ route('shop', ['category_id' => $category->id]) }}">{{ $category->name }}</a></h5>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="{{ asset('front-office/img/categories/cat-2.jpg') }}">
-                        <h5><a href="#">Dried Fruit</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="{{ asset('front-office/img/categories/cat-3.jpg') }}">
-                        <h5><a href="#">Vegetables</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="{{ asset('front-office/img/categories/cat-4.jpg') }}">
-                        <h5><a href="#">drink fruits</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="{{ asset('front-office/img/categories/cat-5.jpg') }}">
-                        <h5><a href="#">drink fruits</a></h5>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
 </section>
 <!-- Categories Section End -->
 
-<!-- Featured Section Begin -->
+<!-- Featured Section Begin
 <section class="featured spad">
     <div class="container">
         <div class="row">
@@ -231,11 +206,11 @@
         </div>
     </div>
 </section>
-<!-- Featured Section End -->
+ Featured Section End -->
 
 <!-- Banner Begin -->
-<div class="banner">
-    <div class="container">
+<div class="banner pt-5">
+    <div class="container pt-3">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="banner__pic">
@@ -253,210 +228,89 @@
 <!-- Banner End -->
 
 <!-- Latest Product Section Begin -->
-<section class="latest-product spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="latest-product__text">
-                    <h4>Latest Products</h4>
-                    <div class="latest-product__slider owl-carousel">
-                        <div class="latest-prdouct__slider__item">
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{ asset('front-office/img/latest-product/lp-1.jpg') }}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
-                                </div>
-                            </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{ asset('front-office/img/latest-product/lp-2.jpg') }}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
-                                </div>
-                            </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{ asset('front-office/img/latest-product/lp-3.jpg') }}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="latest-prdouct__slider__item">
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{ asset('front-office/img/latest-product/lp-1.jpg') }}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
-                                </div>
-                            </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{  ('front-office/img/latest-product/lp-2.jpg') }}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
-                                </div>
-                            </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{ asset('front-office/img/latest-product/lp-3.jpg') }}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
-                                </div>
-                            </a>
+@if (!$latest_products->isEmpty() || !$top_rated_products->isEmpty() || !$top_sold_products->isEmpty())
+    <section class="latest-product spad mb-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                @if (!$latest_products->isEmpty())
+                    <div class="col-lg-4 col-md-6">
+                        <div class="latest-product__text">
+                            <h4>Nouveaux produits</h4>
+                            <div class="latest-product__slider owl-carousel">
+                                @foreach ($latest_products as $sub_latest_products)
+                                    <div class="latest-prdouct__slider__item">
+                                        @foreach ($sub_latest_products as $product)
+                                            <a href="{{ route('shop-details', ['product_id' => $product->id]) }}" class="latest-product__item">
+                                                <div class="latest-product__item__pic">
+                                                    <img src="{{ $product->image }}" alt="">
+                                                </div>
+                                                <div class="latest-product__item__text">
+                                                    <h6>{{ $product->name }}</h6>
+                                                    <span>{{ $product->price }} FCFA</span>
+                                                </div>
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="latest-product__text">
-                    <h4>Top Rated Products</h4>
-                    <div class="latest-product__slider owl-carousel">
-                        <div class="latest-prdouct__slider__item">
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{ asset('front-office/img/latest-product/lp-1.jpg') }}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
-                                </div>
-                            </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{ asset('front-office/img/latest-product/lp-2.jpg') }}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
-                                </div>
-                            </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{ asset('front-office/img/latest-product/lp-3.jpg') }}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="latest-prdouct__slider__item">
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{ asset('front-office/img/latest-product/lp-1.jpg') }}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
-                                </div>
-                            </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{ asset('front-office/img/latest-product/lp-2.jpg') }}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
-                                </div>
-                            </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{ asset('front-office/img/latest-product/lp-3.jpg') }}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
-                                </div>
-                            </a>
+                @endif
+                @if (!$top_rated_products->isEmpty())
+                    <div class="col-lg-4 col-md-6">
+                        <div class="latest-product__text">
+                            <h4>Produits les mieux notés</h4>
+                            <div class="latest-product__slider owl-carousel">
+                                @foreach ($top_rated_products as $sub_top_rated_products)
+                                    <div class="latest-prdouct__slider__item">
+                                        @foreach ($sub_top_rated_products as $product)
+                                            <a href="{{ route('shop-details', ['product_id' => $product->id]) }}" class="latest-product__item">
+                                                <div class="latest-product__item__pic">
+                                                    <img src="{{ $product->image }}" alt="">
+                                                </div>
+                                                <div class="latest-product__item__text">
+                                                    <h6>{{ $product->name }}</h6>
+                                                    <span>{{ $product->price }} FCFA</span>
+                                                </div>
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="latest-product__text">
-                    <h4>Review Products</h4>
-                    <div class="latest-product__slider owl-carousel">
-                        <div class="latest-prdouct__slider__item">
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{ asset('front-office/img/latest-product/lp-1.jpg') }}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
-                                </div>
-                            </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{ asset('front-office/img/latest-product/lp-2.jpg') }}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
-                                </div>
-                            </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{ asset('front-office/img/latest-product/lp-3.jpg') }}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="latest-prdouct__slider__item">
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{ asset('front-office/img/latest-product/lp-1.jpg') }}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
-                                </div>
-                            </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{ asset('front-office/img/latest-product/lp-2.jpg') }}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
-                                </div>
-                            </a>
-                            <a href="#" class="latest-product__item">
-                                <div class="latest-product__item__pic">
-                                    <img src="{{ asset('front-office/img/latest-product/lp-3.jpg') }}" alt="">
-                                </div>
-                                <div class="latest-product__item__text">
-                                    <h6>Crab Pool Security</h6>
-                                    <span>$30.00</span>
-                                </div>
-                            </a>
+                @endif
+                @if (!$top_sold_products->isEmpty())
+                    <div class="col-lg-4 col-md-6">
+                        <div class="latest-product__text">
+                            <h4>Meilleures ventes</h4>
+                            <div class="latest-product__slider owl-carousel">
+                                @foreach ($top_sold_products as $sub_top_sold_products)
+                                    <div class="latest-prdouct__slider__item">
+                                        @foreach ($sub_top_sold_products as $product)
+                                            <a href="{{ route('shop-details', ['product_id' => $product->product_id]) }}" class="latest-product__item">
+                                                <div class="latest-product__item__pic">
+                                                    <img src="{{ $product->product_image }}" alt="">
+                                                </div>
+                                                <div class="latest-product__item__text">
+                                                    <h6>{{ $product->product_name }}</h6>
+                                                    <span>{{ $product->product_price }} FCFA</span>
+                                                </div>
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
-    </div>
-</section>
+    </section>
+@endif
 <!-- Latest Product Section End -->
 
-<!-- Blog Section Begin -->
+<!-- Blog Section Begin
 <section class="from-blog spad">
     <div class="container">
         <div class="row">
@@ -515,5 +369,45 @@
         </div>
     </div>
 </section>
-<!-- Blog Section End -->
+Blog Section End -->
+@endsection
+
+@section('js')
+    <script>
+        $(document).ready(function() {
+            var categories = <?php echo json_encode($categories) ?>;
+
+            $('#search-category').on('keyup', function() {
+                if ($(this).val()?.length) {
+                    categories = categories?.filter((item) => item?.name?.includes($(this).val()));
+                } else {
+                    categories = <?php echo json_encode($categories) ?>;
+                }
+
+                $('.categories__content ul').empty();
+                if (categories?.length) {
+                    categories?.forEach((element) => {
+                        var route = '{{ env('APP_REAL_URL') }}' + '/shop/' + element?.id;
+                        console.log(route);
+                        $('.categories__content ul').append(
+                            `
+                                <li>
+                                    <a href="${route}">${element?.name}</a>
+                                </li>
+                            `
+                        );
+                    });
+
+                } else {
+                    $('.categories__content ul').append(
+                        `
+                            <li>
+                                <a href="#" class="text-black-50">Aucune catégorie ne correspond à votre recherche.</a>
+                            </li>
+                        `
+                    );
+                }
+            });
+        });
+    </script>
 @endsection

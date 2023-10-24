@@ -17,9 +17,11 @@ class OrderFactory extends Factory
      */
     public function definition(): array
     {
+        $statuses = ['pending', 'processed', 'aborted',];
         return [
             'user_id' => User::inRandomOrder()->first()->id,
             'amount' => fake()->randomNumber(9),
+            'status' => $statuses[rand(0, count($statuses) - 1)],
         ];
     }
 }

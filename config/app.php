@@ -195,4 +195,19 @@ return [
     */
 
     'admin_role_slug' => 'admin',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Orders status values
+    |--------------------------------------------------------------------------
+    |
+    | This array retrieves orders status values.
+    |
+    */
+
+    'order_status' => [
+        'pending' => 'pending',
+        'processed' => 'processed',
+        'aborted' => 'aborted',
+    ],
 ];

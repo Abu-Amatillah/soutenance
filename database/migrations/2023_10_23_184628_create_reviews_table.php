@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->uuid('id');
-            $table->double('note');
+            $table->double('rating');
             $table->string('comment')->nullable();
             $table->foreignIdFor(User::class)->restrictOnUpdate()->restrictOnDelete();
             $table->foreignIdFor(Product::class)->restrictOnUpdate()->restrictOnDelete();

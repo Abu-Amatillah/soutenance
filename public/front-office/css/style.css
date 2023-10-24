@@ -589,7 +589,7 @@ ol {
 .hero__categories__all {
 	background: #7fad39;
 	position: relative;
-	padding: 10px 25px 10px 40px;
+	padding: 10px 25px 10px 25px;
 	cursor: pointer;
 }
 
@@ -615,11 +615,14 @@ ol {
 	color: #ffffff;
 }
 
-.hero__categories ul {
+.hero__categories .categories__content {
+    background-color: #ffffff;
 	border: 1px solid #ebebeb;
-	padding-left: 40px;
-	padding-top: 10px;
-	padding-bottom: 12px;
+    padding: 10px 20px 12px 20px;
+    height: 500px;
+    overflow-y: auto;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
 }
 
 .hero__categories ul li {
@@ -3465,4 +3468,12 @@ ol {
 	.blog__details__hero__text h2 {
 		font-size: 24px;
 	}
+}
+
+.form-control:focus {
+    color: #181919;
+    background-color: #fff;
+    border-color: #7fad39;
+    outline: 0;
+    box-shadow: 0 0 0 0.05rem rgba(127,173,57,.25);
 }

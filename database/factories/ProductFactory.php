@@ -17,8 +17,10 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
+        $name = fake()->sentence();
         return [
-            'name'=> fake()->sentence(),
+            'name'=> $name,
+            'image' => fake()->imageUrl(640, 480, null, true, $name),
             'description'=> fake()->sentences(3, true),
             'information'=> fake()->paragraph(4, true),
             'quantity'=> fake()->randomNumber(4),

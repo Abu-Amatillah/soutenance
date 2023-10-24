@@ -19,7 +19,7 @@ class ReviewFactory extends Factory
     public function definition(): array
     {
         return [
-            'note' => fake()->randomFloat(1, 0, 5),
+            'rating' => fake()->randomFloat(1, 0, 5),
             'comment' => fake()->sentences(2, true),
             'user_id' => User::inRandomOrder()->first()->id,
             'product_id' => Product::inRandomOrder()->first()->id,

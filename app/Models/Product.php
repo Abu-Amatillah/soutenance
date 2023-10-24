@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,12 +20,22 @@ class Product extends Model
      */
     protected $fillable = [
         'name',
+        'image',
         'description',
         'information',
         'quantity',
         'price',
         'weight',
         'category_id',
+    ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array<int, string>
+     */
+    protected $appends = [
+        'average_rating',
     ];
 
     /**
@@ -49,5 +60,15 @@ class Product extends Model
     public function order_items(): HasMany
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    /**
+     * Get the user's first name.
+     */
+    protected function averageRating(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => number_format($this->reviews()->average('rating'), 2),
+        );
     }
 }

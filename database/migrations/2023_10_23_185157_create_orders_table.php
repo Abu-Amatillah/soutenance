@@ -18,6 +18,7 @@ return new class extends Migration
             $table->uuid('id');
             $table->foreignIdFor(User::class)->restrictOnUpdate()->restrictOnDelete();
             $table->bigInteger('amount');
+            $table->enum('status', ['pending', 'processed', 'aborted'])->default('pending');
             $table->timestamps();
         });
 
