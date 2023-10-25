@@ -19,6 +19,7 @@ Route::controller(FrontController::class)->group(function () {
     Route::get('shop', 'shop')->name('shop');
     Route::post('cart', 'addToCart')->name('add-to-cart');
     Route::post('wishlist', 'addToWishlist')->name('add-to-whishlist');
+    Route::get('shop-details/{product_id}', 'shop_details')->name('shop-details');
 });
 Route::get('blog', function () {
     return view('blog');
@@ -29,9 +30,6 @@ Route::get('blog-details', function () {
 Route::get('services', function () {
     return view('services');
 })->name('services');
-Route::get('shop-details', function () {
-    return view('shop-details');
-})->name('shop-details');
 Route::get('shoping-cart', function () {
     return view('shoping-cart');
 })->name('shoping-cart');

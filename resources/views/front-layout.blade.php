@@ -62,14 +62,14 @@
             <ul>
                 <li class="{{ Route::currentRouteName() == 'home' ? 'active' : '' }}"><a href="{{ route('home') }}">Acceuil</a></li>
                 <li class="{{ Route::currentRouteName() == 'shop' ? 'active' : '' }}"><a href="{{ route('shop') }}">Boutique</a></li>
-                <li class="{{ (Route::currentRouteName() == 'shop-details' || Route::currentRouteName() == 'shoping-cart' || Route::currentRouteName() == 'checkout' || Route::currentRouteName() == 'blog-details') ? 'active' : '' }}"><a href="#">Pages</a>
+                {{-- <li class="{{ (Route::currentRouteName() == 'shop-details' || Route::currentRouteName() == 'shoping-cart' || Route::currentRouteName() == 'checkout' || Route::currentRouteName() == 'blog-details') ? 'active' : '' }}"><a href="#">Pages</a>
                     <ul class="header__menu__dropdown">
                         <li class="{{ Route::currentRouteName() == 'shop-details' ? 'active' : '' }}"><a href="{{ route('shop-details') }}">Détails Produit</a></li>
                         <li class="{{ Route::currentRouteName() == 'shoping-cart' ? 'active' : '' }}"><a href="{{ route('shoping-cart') }}">Panier</a></li>
                         <li class="{{ Route::currentRouteName() == 'checkout' ? 'active' : '' }}"><a href="{{ route('checkout') }}">Paiement</a></li>
                         <li class="{{ Route::currentRouteName() == 'blog-details' ? 'active' : '' }}"><a href="{{ route('blog-details') }}">Blog Details</a></li>
                     </ul>
-                </li>
+                </li> --}}
                 <li class="{{ Route::currentRouteName() == 'blog' ? 'active' : '' }}"><a href="{{ route('blog') }}">Blog</a></li>
                 <li class="{{ Route::currentRouteName() == 'contact' ? 'active' : '' }}"><a href="{{ route('contact') }}">Contact</a></li>
             </ul>
@@ -140,14 +140,14 @@
                         <ul>
                             <li class="{{ Route::currentRouteName() == 'home' ? 'active' : '' }}"><a href="{{ route('home') }}">Acceuil</a></li>
                             <li class="{{ Route::currentRouteName() == 'shop' ? 'active' : '' }}"><a href="{{ route('shop') }}">Boutique</a></li>
-                            <li class="{{ (Route::currentRouteName() == 'shop-details' || Route::currentRouteName() == 'shoping-cart' || Route::currentRouteName() == 'checkout' || Route::currentRouteName() == 'blog-details') ? 'active' : '' }}"><a href="#">Pages</a>
+                            {{-- <li class="{{ (Route::currentRouteName() == 'shop-details' || Route::currentRouteName() == 'shoping-cart' || Route::currentRouteName() == 'checkout' || Route::currentRouteName() == 'blog-details') ? 'active' : '' }}"><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li class="{{ Route::currentRouteName() == 'shop-details' ? 'active' : '' }}"><a href="{{ route('shop-details') }}">Détails Produit</a></li>
                                     <li class="{{ Route::currentRouteName() == 'shoping-cart' ? 'active' : '' }}"><a href="{{ route('shoping-cart') }}">Panier</a></li>
                                     <li class="{{ Route::currentRouteName() == 'checkout' ? 'active' : '' }}"><a href="{{ route('checkout') }}">Paiement</a></li>
                                     <li class="{{ Route::currentRouteName() == 'blog-details' ? 'active' : '' }}"><a href="{{ route('blog-details') }}">Blog Details</a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
                             <li class="{{ Route::currentRouteName() == 'blog' ? 'active' : '' }}"><a href="{{ route('blog') }}">Blog</a></li>
                             <li class="{{ Route::currentRouteName() == 'contact' ? 'active' : '' }}"><a href="{{ route('contact') }}">Contact</a></li>
                         </ul>
@@ -156,10 +156,10 @@
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="#"><i class="fa fa-heart"></i> <span>{{ count($wishlist['products']) }}</span></a></li>
+                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>{{ count($cart['products']) }}</span></a></li>
                         </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
+                        <div class="header__cart__price">Produits: <span>{{ $cart['amount'] }} FCFA</span></div>
                     </div>
                 </div>
             </div>
@@ -185,7 +185,7 @@
                             <ul>
                                 @foreach ($categories as $category)
                                     <li>
-                                        <a href="{{ route('shop', ['category_id' => $category->id]) }}">{{ $category->name }}</a>
+                                        <a href="{{ route('shop', ['category' => $category->id]) }}">{{ $category->name }}</a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -195,8 +195,8 @@
                 <div class="col-lg-8">
                     <div class="hero__search">
                         <div class="hero__search__form w-100">
-                            <form action="#">
-                                <input type="text" placeholder="De quoi aviez-vous besoin?">
+                            <form method="GET" action="{{ route('shop') }}">
+                                <input type="search" placeholder="De quoi aviez-vous besoin?" name="search">
                                 <button type="submit" class="site-btn">Rechercher</button>
                             </form>
                         </div>

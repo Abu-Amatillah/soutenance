@@ -258,13 +258,13 @@
             if ('{{ $request->min_price }}') {
                 minamount.val('{{ $request->min_price }}' + ' FCFA');
             } else {
-                minamount.val(minPrice + ' FCFA');
+                minamount.val(minPrice ? (minPrice + ' FCFA') : '');
             }
 
             if ('{{ $request->max_price }}') {
                 maxamount.val('{{ $request->max_price }}' + ' FCFA');
             } else {
-                maxamount.val(maxPrice + ' FCFA');
+                maxamount.val(maxPrice ? (maxPrice + ' FCFA') : '');
             }
 
             rangeSlider.slider({
@@ -273,32 +273,30 @@
                 max: maxPrice,
                 values: [minamount.val()?.replace(' FCFA', ''), maxamount.val()?.replace(' FCFA', '')],
                 stop: function (event, ui) {
-                    minamount.val(ui.values[0] + ' FCFA');
-                    maxamount.val(ui.values[1] + ' FCFA');
+                    minamount.val(ui.values[0] ? (ui.values[0] + ' FCFA') : '');
+                    maxamount.val(ui.values[0] ? (ui.values[1] + ' FCFA') : '');
                     minamount.trigger('change');
                     maxamount.trigger('change');
                 },
             });
-            minamount.val(rangeSlider.slider("values", 0) + ' FCFA');
-            maxamount.val(rangeSlider.slider("values", 1) + ' FCFA');
+            minamount.val(rangeSlider.slider("values", 0) ? (rangeSlider.slider("values", 0) + ' FCFA') : '');
+            maxamount.val(rangeSlider.slider("values", 1) ? (rangeSlider.slider("values", 1) + ' FCFA') : '');
 
 
             $('#sort-by').on('change', function() {
-                window.location.href = '{{ env('APP_REAL_URL') }}' + '/shop' + '?sort_by=' + $('#sort-by').val() + '&min_price=' + minamount.val()?.replace(' FCFA', '') + '&max_price=' + maxamount.val()?.replace(' FCFA', '') + ($('#category').val() ? '&category=' + $('#category').val() : '');
+                window.location.href = '{{ env('APP_REAL_URL') }}' + '/shop' + '?sort_by=' + $('#sort-by').val() + '&min_price=' + minamount.val()?.replace(' FCFA', '') + '&max_price=' + maxamount.val()?.replace(' FCFA', '') + ($('#category').val() ? '&category=' + $('#category').val() : '') + ('{{ $request->search }}' ? '&search=' + '{{ $request->search }}' : '');
             });
 
             minamount.on('change', function() {
-                window.location.href = '{{ env('APP_REAL_URL') }}' + '/shop' + '?sort_by=' + $('#sort-by').val() + '&min_price=' + minamount.val()?.replace(' FCFA', '') + '&max_price=' + maxamount.val()?.replace(' FCFA', '') + ($('#category').val() ? '&category=' + $('#category').val() : '');
+                window.location.href = '{{ env('APP_REAL_URL') }}' + '/shop' + '?sort_by=' + $('#sort-by').val() + '&min_price=' + minamount.val()?.replace(' FCFA', '') + '&max_price=' + maxamount.val()?.replace(' FCFA', '') + ($('#category').val() ? '&category=' + $('#category').val() : '') + ('{{ $request->search }}' ? '&search=' + '{{ $request->search }}' : '');
             });
 
             maxamount.on('change', function() {
-                window.location.href = '{{ env('APP_REAL_URL') }}' + '/shop' + '?sort_by=' + $('#sort-by').val() + '&min_price=' + minamount.val()?.replace(' FCFA', '') + '&max_price=' + maxamount.val()?.replace(' FCFA', '') + ($('#category').val() ? '&category=' + $('#category').val() : '');
+                window.location.href = '{{ env('APP_REAL_URL') }}' + '/shop' + '?sort_by=' + $('#sort-by').val() + '&min_price=' + minamount.val()?.replace(' FCFA', '') + '&max_price=' + maxamount.val()?.replace(' FCFA', '') + ($('#category').val() ? '&category=' + $('#category').val() : '') + ('{{ $request->search }}' ? '&search=' + '{{ $request->search }}' : '');
             });
 
             window.cart = <?php echo json_encode($cart['products']); ?>;
-            updateCartButton();
             window.wishlist = <?php echo json_encode($wishlist['products']); ?>;
-            updateWishlistButton();
 
             $('.toggle-to-cart').on('click', function(event) {
                 var cart = window.cart || [];
@@ -325,7 +323,6 @@
                     success: function (data, status, xhr) {
                         window.location.reload();
                         window.cart = data['products'];
-                        updateCartButton();
                     }
                 });
             });
@@ -354,20 +351,9 @@
                     success: function (data, status, xhr) {
                         window.location.reload();
                         window.wishlist = data['products'];
-                        updateWishlistButton();
                     }
                 });
             });
         });
-
-        function updateCartButton() {
-            console.log(window.cart);
-            $('#items-in-cart').html(window.cart.length);
-        }
-
-        function updateWishlistButton() {
-            console.log(window.wishlist);
-            $('#items-in-wishlist').html(window.wishlist.length);
-        }
     </script>
 @endsection

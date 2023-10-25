@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 class FrontController extends Controller
 {
     public function home(): View {
-        $categories = Category::all();
+        $categories = Category::has('products')->get();
         $latest_products = Product::latest()->take(12)->get();
         $latest_products = $latest_products->split(3);
         $top_rated_products = Product::leftJoin('reviews', 'products.id', '=', 'reviews.product_id')
@@ -39,7 +39,7 @@ class FrontController extends Controller
         $top_sold_products = $top_sold_products->split(3);
         $cart = session()->get('cart');
         if ($cart == null)
-            $cart = ['products' => [], 'ids' => []];
+            $cart = ['products' => [], 'ids' => [], 'amount' => 0];
         $wishlist = session()->get('wishlist');
         if ($wishlist == null)
             $wishlist = ['products' => [], 'ids' => []];
@@ -47,7 +47,7 @@ class FrontController extends Controller
     }
 
     public function shop(Request $request, $per_page = 12): View {
-        $categories = Category::all();
+        $categories = Category::has('products')->get();
         $latest_products = Product::latest()->take($per_page)->get();
         $latest_products = $latest_products->split(3);
         $min_price = Product::min('price');
@@ -58,38 +58,70 @@ class FrontController extends Controller
         $filter_max_price = $request->max_price;
         $category_id = $request->category;
         $sort_by = $request->sort_by ? $request->sort_by : 'DESC';
+        $search = $request->search;
         $products = Product::orderBy('updated_at', $sort_by);
-        if ($category_id) {
-            $products = $products->where('category_id', $category_id);
-            $min_price = $products->min('price');
-            $max_price = $products->max('price');
+        if ($search) {
+            $products = $products->where('name', 'LIKE', '%'.$search.'%');
+            if ($category_id) {
+                $products = $products->where('category_id', $category_id);
+                $min_price = $products->min('price');
+                $max_price = $products->max('price');
 
-            if($filter_min_price && $filter_max_price) {
-                if($filter_min_price > 0 && $filter_max_price >0) {
-                    $products = $products->whereBetween('price', [$filter_min_price,$filter_max_price])->paginate($per_page);
+                if($filter_min_price && $filter_max_price) {
+                    if($filter_min_price > 0 && $filter_max_price >0) {
+                        $products = $products->whereBetween('price', [$filter_min_price,$filter_max_price])->paginate($per_page)->withQueryString();
+                    }
+                }
+                #Show default product list in Blade file
+                else {
+                    $products = $products->paginate($per_page)->withQueryString();
+                }
+
+            } else {
+                #Get products according to filter
+                if($filter_min_price && $filter_max_price) {
+                    if($filter_min_price > 0 && $filter_max_price >0) {
+                        $products = Product::whereBetween('price',[$filter_min_price,$filter_max_price])->paginate($per_page)->withQueryString();
+                    }
+                }
+                #Show default product list in Blade file
+                else {
+                    $products = Product::paginate($per_page)->withQueryString();
                 }
             }
-            #Show default product list in Blade file
-            else {
-                $products = $products->paginate($per_page);
-            }
-
         } else {
-            #Get products according to filter
-            if($filter_min_price && $filter_max_price) {
-                if($filter_min_price > 0 && $filter_max_price >0) {
-                    $products = Product::whereBetween('price',[$filter_min_price,$filter_max_price])->paginate($per_page);
+            if ($category_id) {
+                $products = $products->where('category_id', $category_id);
+                $min_price = $products->min('price');
+                $max_price = $products->max('price');
+
+                if($filter_min_price && $filter_max_price) {
+                    if($filter_min_price > 0 && $filter_max_price >0) {
+                        $products = $products->whereBetween('price', [$filter_min_price,$filter_max_price])->paginate($per_page)->withQueryString();
+                    }
                 }
-            }
-            #Show default product list in Blade file
-            else {
-                $products = Product::paginate($per_page);
+                #Show default product list in Blade file
+                else {
+                    $products = $products->paginate($per_page)->withQueryString();
+                }
+
+            } else {
+                #Get products according to filter
+                if($filter_min_price && $filter_max_price) {
+                    if($filter_min_price > 0 && $filter_max_price >0) {
+                        $products = Product::whereBetween('price',[$filter_min_price,$filter_max_price])->paginate($per_page)->withQueryString();
+                    }
+                }
+                #Show default product list in Blade file
+                else {
+                    $products = Product::paginate($per_page)->withQueryString();
+                }
             }
         }
 
         $cart = session()->get('cart');
         if ($cart == null)
-            $cart = ['products' => [], 'ids' => []];
+            $cart = ['products' => [], 'ids' => [], 'amount' => 0];
         $wishlist = session()->get('wishlist');
         if ($wishlist == null)
             $wishlist = ['products' => [], 'ids' => []];
@@ -105,11 +137,16 @@ class FrontController extends Controller
                 'products' => $cart,
                 'ids' => array_map(function ($value) {
                     return $value->id;
-                }, $cart)
-            ]);
+                }, $cart),
+                'amount' => array_reduce($cart, function($carry, $item) {
+                    $carry += $item->quantity * $item->price;
+                    return $carry;
+                })
+            ]
+        );
         $cart = session()->get('cart');
         if ($cart == null)
-            $cart = ['products' => [], 'ids' => []];
+            $cart = ['products' => [], 'ids' => [], 'amount' => 0];
 
         return response()->json($cart);
     }
@@ -130,5 +167,25 @@ class FrontController extends Controller
         if ($wishlist == null)
             $wishlist = ['products' => [], 'ids' => []];
         return response()->json($wishlist);
+    }
+
+    public function shop_details(Request $request, string $product_id, $per_page = 4): View {
+        $categories = Category::has('products')->get();
+        $cart = session()->get('cart');
+        if ($cart == null)
+            $cart = ['products' => [], 'ids' => [], 'amount' => 0];
+        $wishlist = session()->get('wishlist');
+        if ($wishlist == null)
+            $wishlist = ['products' => [], 'ids' => []];
+        $product = Product::with(['category', 'reviews', 'reviews.user'])->find($product_id);
+        $featured_products = Product::inRandomOrder()->where('category_id', $product->category_id)->take($per_page)->get();
+        $filtered = array_filter($cart['products'], function ($item) use ($product) {
+            return $item->id == $product->id;
+        });
+        $cart_item = null;
+        if (count($filtered) > 0) {
+            $cart_item = $filtered[0];
+        }
+        return view('shop-details', compact('categories', 'featured_products', 'product', 'request', 'wishlist', 'cart', 'cart_item'));
     }
 }
