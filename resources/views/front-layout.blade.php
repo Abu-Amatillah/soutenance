@@ -7,10 +7,11 @@
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Electro Shop Bénin</title>
+    <title>{{ env('APP_NAME') }}</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="{{ asset('front-office/css/bootstrap.min.css') }}" type="text/css">
@@ -169,6 +170,43 @@
     </header>
     <!-- Header Section End -->
 
+    <!-- Hero Section Begin -->
+    <section class="hero hero-normal">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="hero__categories position-relative">
+                        <div class="hero__categories__all">
+                            <i class="fa fa-bars"></i>
+                            <span>Toutes les catégories</span>
+                        </div>
+                        <div class="categories__content">
+                            <input id="search-category" class="form-control mt-2 mb-3" type="search" placeholder="Rechercher une catégorie">
+                            <ul>
+                                @foreach ($categories as $category)
+                                    <li>
+                                        <a href="{{ route('shop', ['category_id' => $category->id]) }}">{{ $category->name }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="hero__search">
+                        <div class="hero__search__form w-100">
+                            <form action="#">
+                                <input type="text" placeholder="De quoi aviez-vous besoin?">
+                                <button type="submit" class="site-btn">Rechercher</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
     @yield('content')
 
     <!-- Footer Section Begin -->
@@ -250,6 +288,43 @@
     <script src="{{ asset('front-office/js/mixitup.min.js') }}"></script>
     <script src="{{ asset('front-office/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('front-office/js/main.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            var categories = <?php echo json_encode($categories) ?>;
+
+            $('#search-category').on('keyup', function() {
+                if ($(this).val()?.length) {
+                    categories = categories?.filter((item) => item?.name?.includes($(this).val()));
+                } else {
+                    categories = <?php echo json_encode($categories) ?>;
+                }
+
+                $('.categories__content ul').empty();
+                if (categories?.length) {
+                    categories?.forEach((element) => {
+                        var route = '{{ env('APP_REAL_URL') }}' + '/shop/' + element?.id;
+                        console.log(route);
+                        $('.categories__content ul').append(
+                            `
+                                <li>
+                                    <a href="${route}">${element?.name}</a>
+                                </li>
+                            `
+                        );
+                    });
+
+                } else {
+                    $('.categories__content ul').append(
+                        `
+                            <li>
+                                <a href="#" class="text-black-50">Aucune catégorie ne correspond à votre recherche.</a>
+                            </li>
+                        `
+                    );
+                }
+            });
+        });
+    </script>
 
     @yield('js')
 

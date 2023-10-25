@@ -4,39 +4,13 @@
 <section class="hero">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3">
-                <div class="hero__categories">
-                    <div class="hero__categories__all">
-                        <i class="fa fa-bars"></i>
-                        <span>Toutes les catégories</span>
-                    </div>
-                    <div class="categories__content">
-                        <input id="search-category" class="form-control mt-2 mb-3" type="search" placeholder="Rechercher une catégorie">
-                        <ul>
-                            @foreach ($categories as $category)
-                                <li>
-                                    <a href="{{ route('shop', ['category_id' => $category->id]) }}">{{ $category->name }}</a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-9">
-                <div class="hero__search">
-                    <div class="hero__search__form w-100">
-                        <form action="#">
-                            <input type="text" placeholder="De quoi aviez-vous besoin?">
-                            <button type="submit" class="site-btn">Rechercher</button>
-                        </form>
-                    </div>
-                </div>
+            <div class="col-12">
                 <div class="hero__item set-bg" data-setbg="{{asset('front-office/img/hero/banner-1.jpg') }}">
                     <div class="hero__text">
-                        <span>Publicité</span>
-                        <h2>Vegetable <br />100% Organic</h2>
-                        <p>Free Pickup and Delivery Available</p>
-                        <a href="#" class="primary-btn">SHOP NOW</a>
+                        <span>{{ env('APP_NAME') }}</span>
+                        <h2>Boutique en ligne d'article électriques et électroniques</h2>
+                        <p class="">Nous sommes la référence au Bénin en consommables électriques et électronique</p>
+                        <a href="{{ route('shop') }}" class="primary-btn">Acheter</a>
                     </div>
                 </div>
             </div>
@@ -46,21 +20,23 @@
 <!-- Hero Section End -->
 
 <!-- Categories Section Begin -->
-<section class="categories">
-    <div class="container">
-        <div class="row">
-            <div class="categories__slider owl-carousel">
-                @foreach ($categories as $category)
-                    <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{{ $category->image }}">
-                            <h5><a href="{{ route('shop', ['category_id' => $category->id]) }}">{{ $category->name }}</a></h5>
+@if($categories->count() >= 4)
+    <section class="categories">
+        <div class="container">
+            <div class="row">
+                <div class="categories__slider owl-carousel">
+                    @foreach ($categories as $category)
+                        <div class="col-lg-3">
+                            <div class="categories__item set-bg" data-setbg="{{ $category->image }}">
+                                <h5><a href="{{ route('shop', ['category_id' => $category->id]) }}">{{ $category->name }}</a></h5>
+                            </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+@endif
 <!-- Categories Section End -->
 
 <!-- Featured Section Begin
@@ -370,44 +346,4 @@
     </div>
 </section>
 Blog Section End -->
-@endsection
-
-@section('js')
-    <script>
-        $(document).ready(function() {
-            var categories = <?php echo json_encode($categories) ?>;
-
-            $('#search-category').on('keyup', function() {
-                if ($(this).val()?.length) {
-                    categories = categories?.filter((item) => item?.name?.includes($(this).val()));
-                } else {
-                    categories = <?php echo json_encode($categories) ?>;
-                }
-
-                $('.categories__content ul').empty();
-                if (categories?.length) {
-                    categories?.forEach((element) => {
-                        var route = '{{ env('APP_REAL_URL') }}' + '/shop/' + element?.id;
-                        console.log(route);
-                        $('.categories__content ul').append(
-                            `
-                                <li>
-                                    <a href="${route}">${element?.name}</a>
-                                </li>
-                            `
-                        );
-                    });
-
-                } else {
-                    $('.categories__content ul').append(
-                        `
-                            <li>
-                                <a href="#" class="text-black-50">Aucune catégorie ne correspond à votre recherche.</a>
-                            </li>
-                        `
-                    );
-                }
-            });
-        });
-    </script>
 @endsection

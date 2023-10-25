@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(FrontController::class)->group(function () {
     Route::get('/', 'home')->name('home');
+    Route::get('shop', 'shop')->name('shop');
+    Route::post('cart', 'addToCart')->name('add-to-cart');
+    Route::post('wishlist', 'addToWishlist')->name('add-to-whishlist');
 });
 Route::get('blog', function () {
     return view('blog');
@@ -29,9 +32,6 @@ Route::get('services', function () {
 Route::get('shop-details', function () {
     return view('shop-details');
 })->name('shop-details');
-Route::get('shop', function () {
-    return view('shop-grid');
-})->name('shop');
 Route::get('shoping-cart', function () {
     return view('shoping-cart');
 })->name('shoping-cart');
