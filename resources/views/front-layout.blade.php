@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -83,8 +83,8 @@
         </div>
         <div class="humberger__menu__contact">
             <ul>
-                <li><i class="fa fa-phone"></i> +65 11.188.888</li>
-                <li>support 24/7 time</li>
+                <li><i class="fa fa-phone"></i> +00229 0000000</li>
+                <li>Ouvert 7/7 de 08h à 20h</li>
             </ul>
         </div>
     </div>
@@ -121,7 +121,7 @@
                                 </ul>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Login</a>
+                                <a href="#"><i class="fa fa-user"></i> S'enregistrer</a>
                             </div>
                         </div>
                     </div>
@@ -219,9 +219,9 @@
                             <a href="{{ route('home') }}"><img src="{{ asset('front-office/img/logo.png') }}" alt=""></a>
                         </div>
                         <ul>
-                            <li>Address: 60-49 Road 11378 New York</li>
-                            <li>Phone: +65 11.188.888</li>
-                            <li>Email: hello@colorlib.com</li>
+                            <li>Adresse: Parakou </li>
+                            <li>Téléphone: +00229000000</li>
+                            <li>E-mail:electshop.com</li>
                         </ul>
                     </div>
                 </div>
@@ -268,7 +268,7 @@
                     <div class="footer__copyright">
                         <div class="footer__copyright__text">
                             <p>
-                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
+                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> Tout droit réserver
                             </p>
                         </div>
                         <div class="footer__copyright__payment"><img src="{{ asset('front-office/img/payment-item.png') }}" alt=""></div>

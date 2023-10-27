@@ -8,8 +8,8 @@
                 <div class="hero__item set-bg" data-setbg="{{asset('front-office/img/hero/banner-1.jpg') }}">
                     <div class="hero__text">
                         <span>{{ env('APP_NAME') }}</span>
-                        <h2>Boutique en ligne d'article électriques et électroniques</h2>
-                        <p class="">Nous sommes la référence au Bénin en consommables électriques et électronique</p>
+                        <h2>Boutique en ligne d'article électriques et électroniques.</h2>
+                        <p class="">Nous sommes la référence au Bénin en consommables électriques et électronique.</p>
                         <a href="{{ route('shop') }}" class="primary-btn">Acheter</a>
                     </div>
                 </div>

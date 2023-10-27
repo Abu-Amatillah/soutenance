@@ -34,7 +34,7 @@
                                     <span class="arrow_carrot-down"></span>
                                 </div>
                                 <input type="text" placeholder="What do yo u need?">
-                                <button type="submit" class="site-btn">SEARCH</button>
+                                <button type="submit" class="site-btn">Rechercher</button>
                             </form>
                         </div>
                         <div class="hero__search__phone">
@@ -42,8 +42,8 @@
                                 <i class="fa fa-phone"></i>
                             </div>
                             <div class="hero__search__phone__text">
-                                <h5>+65 11.188.888</h5>
-                                <span>support 24/7 time</span>
+                                <h5>+0029000000</h5>
+                                <span>Ouvert 7/7 de 08h-20h</span>
                             </div>
                         </div>
                     </div>

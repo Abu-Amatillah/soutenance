@@ -111,9 +111,14 @@
                                                         <div class="d-flex flex-column ml-2">
                                                             <div class="product__details__rating d-flex align-items-center">
                                                                 <h6 class="mb-1 text-primary mr-3">{{ $review->user->first_name.' '.$review->user->last_name }}</h6>
-                                                                @for ($i=0; $i < count(range(0, $review->rating - 1)); $i++)
+                                                                @if($review->rating >= 2)
+                                                                    @for ($i=0; $i < count(range(0, $review->rating - 1, 1)); $i++)
+                                                                        <i class="fa fa-star text-warning"></i>
+                                                                    @endfor
+                                                                @endif
+                                                                @if($review->rating == 1)
                                                                     <i class="fa fa-star text-warning"></i>
-                                                                @endfor
+                                                                @endif
                                                             </div>
 
                                                             @if ($review->comment)
