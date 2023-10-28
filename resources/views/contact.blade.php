@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>Nos Contacts</h2>
+                        <h2>Contact</h2>
                     </div>
                 </div>
             </div>
@@ -21,29 +21,29 @@
                 <div class="col-lg-3 col-md-3 col-sm-6 text-center">
                     <div class="contact__widget">
                         <span class="icon_phone"></span>
-                        <h4>Téléphones</h4>
+                        <h4>Téléphone</h4>
                         <p>+2296662549</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 text-center">
                     <div class="contact__widget">
                         <span class="icon_pin_alt"></span>
-                        <h4>Nos Adresses</h4>
-                        <p>Quartier Gbira après KOBOUROU CITY</p>
+                        <h4>Adresse</h4>
+                        <p>Quartier Gbira après KOBOUROU CITY, Parakou, BJ</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 text-center">
                     <div class="contact__widget">
                         <span class="icon_clock_alt"></span>
                         <h4>Horaire</h4>
-                        <p>10:00 am to 23:00 pm</p>
+                        <p>08h00 à 20h00</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 text-center">
                     <div class="contact__widget">
                         <span class="icon_mail_alt"></span>
                         <h4>Email</h4>
-                        <p>hello@colorlib.com</p>
+                        <p>mountassirou41@gmail.com</p>
                     </div>
                 </div>
             </div>
@@ -53,16 +53,14 @@
 
     <!-- Map Begin -->
     <div class="map">
-        <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d49116.39176087041!2d-86.41867791216099!3d39.69977417971648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x886ca48c841038a1%3A0x70cfba96bf847f0!2sPlainfield%2C%20IN%2C%20USA!5e0!3m2!1sen!2sbd!4v1586106673811!5m2!1sen!2sbd"
-            height="500" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d554.4126605605618!2d2.6245353881248885!3d9.366759696685603!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sbj!4v1698492665643!5m2!1sfr!2sbj" width="600" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" aria-hidden="false" tabindex="0"></iframe>
         <div class="map-inside">
             <i class="icon_pin"></i>
             <div class="inside-widget">
-                <h4>New York</h4>
+                <h4>Gbira</h4>
                 <ul>
-                    <li>Phone: +12-345-6789</li>
-                    <li>Add: 16 Creek Ave. Farmingdale, NY</li>
+                    <li>Téléphone: +2296662549</li>
+                    <li>Addresse: Quartier Gbira après KOBOUROU CITY, Parakou, BJ</li>
                 </ul>
             </div>
         </div>
@@ -75,21 +73,21 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="contact__form__title">
-                        <h2>Leave Message</h2>
+                        <h2>Laisser un message</h2>
                     </div>
                 </div>
             </div>
-            <form action="#">
+            <form method="POST" action="#">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <input type="text" placeholder="Your name">
+                        <input name="name" value="{{ auth()->user() ? auth()->user()->first_name.' '. auth()->user()->last_name : '' }}" required type="text" placeholder="Votre nom complet">
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <input type="text" placeholder="Your Email">
+                        <input name="email" value="{{ auth()->user() ? auth()->user()->email : '' }}" required type="email" placeholder="Votre adresse e-mail">
                     </div>
                     <div class="col-lg-12 text-center">
-                        <textarea placeholder="Your message"></textarea>
-                        <button type="submit" class="site-btn">SEND MESSAGE</button>
+                        <textarea name="message" required placeholder="Votre message"></textarea>
+                        <button type="submit" class="site-btn">ENVOYER</button>
                     </div>
                 </div>
             </form>

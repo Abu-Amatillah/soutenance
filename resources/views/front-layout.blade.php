@@ -35,14 +35,20 @@
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
-            <a href="#"><img src="{{ asset('front-office/img/logo.png') }}" alt=""></a>
+            <a href="#"><img src="{{ asset('front-office/img/logo.svg') }}" alt=""></a>
         </div>
         <div class="humberger__menu__cart">
             <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                <li><a href="{{ route('wishlist') }}"><i class="fa fa-heart"></i> <span>{{ count($wishlist['products']) }}</span></a></li>
+                <li><a href="{{ route('shopping-cart') }}"><i class="fa fa-shopping-bag"></i> <span>{{ count($cart['products']) }}</span></a></li>
             </ul>
-            <div class="header__cart__price">item: <span>$150.00</span></div>
+            <div class="header__cart__price">Produits: <span>{{ $cart['amount'] }} FCFA</span></div>
+        </div>
+        <div class="humberger__menu__cart">
+            <ul>
+                <li><a data-toggle="modal" data-target="#serviceModal" class="text-black-50 text-decoration-none font-weight-normal cursor-pointer">Service</a></li>
+                <li><a data-toggle="modal" data-target="#devisModal" class="text-black-50 text-decoration-none font-weight-normal cursor-pointer">Devis</a></li>
+            </ul>
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
@@ -55,35 +61,36 @@
                 </ul>
             </div>
             <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i>Se connecter</a>
+                <a href="{{ route('login') }}"><i class="fa fa-user"></i>Se connecter</a>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
+
                 <li class="{{ Route::currentRouteName() == 'home' ? 'active' : '' }}"><a href="{{ route('home') }}">Acceuil</a></li>
                 <li class="{{ Route::currentRouteName() == 'shop' ? 'active' : '' }}"><a href="{{ route('shop') }}">Boutique</a></li>
-                {{-- <li class="{{ (Route::currentRouteName() == 'shop-details' || Route::currentRouteName() == 'shoping-cart' || Route::currentRouteName() == 'checkout' || Route::currentRouteName() == 'blog-details') ? 'active' : '' }}"><a href="#">Pages</a>
+                {{-- <li class="{{ (Route::currentRouteName() == 'shop-details' || Route::currentRouteName() == 'shopping-cart' || Route::currentRouteName() == 'checkout' || Route::currentRouteName() == 'blog-details') ? 'active' : '' }}"><a href="#">Pages</a>
                     <ul class="header__menu__dropdown">
                         <li class="{{ Route::currentRouteName() == 'shop-details' ? 'active' : '' }}"><a href="{{ route('shop-details') }}">Détails Produit</a></li>
-                        <li class="{{ Route::currentRouteName() == 'shoping-cart' ? 'active' : '' }}"><a href="{{ route('shoping-cart') }}">Panier</a></li>
+                        <li class="{{ Route::currentRouteName() == 'shopping-cart' ? 'active' : '' }}"><a href="{{ route('shopping-cart') }}">Panier</a></li>
                         <li class="{{ Route::currentRouteName() == 'checkout' ? 'active' : '' }}"><a href="{{ route('checkout') }}">Paiement</a></li>
                         <li class="{{ Route::currentRouteName() == 'blog-details' ? 'active' : '' }}"><a href="{{ route('blog-details') }}">Blog Details</a></li>
                     </ul>
-                </li> --}}
-                <li class="{{ Route::currentRouteName() == 'blog' ? 'active' : '' }}"><a href="{{ route('blog') }}">Blog</a></li>
+                </li>
+                <li class="{{ Route::currentRouteName() == 'blog' ? 'active' : '' }}"><a href="{{ route('blog') }}">Blog</a></li> --}}
                 <li class="{{ Route::currentRouteName() == 'contact' ? 'active' : '' }}"><a href="{{ route('contact') }}">Contact</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
         <div class="header__top__right__social">
             <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-instagram"></i></a>
+            <a href="#"><i class="fa fa-whatsapp"></i></a>
             <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-pinterest-p"></i></a>
         </div>
         <div class="humberger__menu__contact">
             <ul>
-                <li><i class="fa fa-phone"></i> +00229 0000000</li>
+                <li><i class="fa fa-phone"></i> +2296662549</li>
                 <li>Ouvert 7/7 de 08h à 20h</li>
             </ul>
         </div>
@@ -94,12 +101,14 @@
     <header class="header">
         <div class="header__top">
             <div class="container">
-                <div class="row">
+                <div class="row align-items-center">
                     <div class="col-lg-6 col-md-6">
                         <div class="header__top__left">
                             <ul>
-                                <li><i class="fa fa-phone"></i> +65 11.188.888 </li>
-                                <li>support 24/7 time</li>
+                                <li><i class="fa fa-phone"></i> +2296662549 </li>
+                                <li>Ouvert 7/7 de 08h à 20h</li>
+                                <li><a data-toggle="modal" data-target="#serviceModal" class="text-black-50 text-decoration-none font-weight-normal cursor-pointer">Service</a></li>
+                                <li><a data-toggle="modal" data-target="#devisModal" class="text-black-50 text-decoration-none font-weight-normal cursor-pointer">Devis</a></li>
                             </ul>
                         </div>
                     </div>
@@ -107,9 +116,9 @@
                         <div class="header__top__right">
                             <div class="header__top__right__social">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                                <a href="#"><i class="fa fa-whatsapp"></i></a>
                                 <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
-                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
                             </div>
                             <div class="header__top__right__language">
                                 <img src="{{ asset('front-office/img/language.png') }}" alt="">
@@ -120,8 +129,28 @@
                                     <li><a href="#">Anglais</a></li>
                                 </ul>
                             </div>
-                            <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> S'enregistrer</a>
+
+                            <div class="header__top__right__auth {{ auth()->user() ? 'dropdown' : '' }}">
+                                @if (auth()->user())
+                                <div class="dropdown">
+                                    <a class="dropdown-toggle" type="button" id="loggedDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      {{ auth()->user()->first_name.' '.auth()->user()->last_name }}
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="loggedDropdown">
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+
+                                            <a class="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out" :href="route('logout')"
+                                                    onclick="event.preventDefault();
+                                                                this.closest('form').submit();">
+                                                {{ __('Déconnexion') }}
+                                            </a>
+                                        </form>
+                                    </div>
+                                  </div>
+                                @else
+                                    <a href="{{ route('login') }}"><i class="fa fa-user"></i> Se connecter</a>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -132,7 +161,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="{{ route('home') }}"><img src="{{ asset('front-office/img/logo.png') }}" alt=""></a>
+                        <a href="{{ route('home') }}"><img src="{{ asset('front-office/img/logo.svg') }}" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -140,15 +169,15 @@
                         <ul>
                             <li class="{{ Route::currentRouteName() == 'home' ? 'active' : '' }}"><a href="{{ route('home') }}">Acceuil</a></li>
                             <li class="{{ Route::currentRouteName() == 'shop' ? 'active' : '' }}"><a href="{{ route('shop') }}">Boutique</a></li>
-                            {{-- <li class="{{ (Route::currentRouteName() == 'shop-details' || Route::currentRouteName() == 'shoping-cart' || Route::currentRouteName() == 'checkout' || Route::currentRouteName() == 'blog-details') ? 'active' : '' }}"><a href="#">Pages</a>
+                            {{-- <li class="{{ (Route::currentRouteName() == 'shop-details' || Route::currentRouteName() == 'shopping-cart' || Route::currentRouteName() == 'checkout' || Route::currentRouteName() == 'blog-details') ? 'active' : '' }}"><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li class="{{ Route::currentRouteName() == 'shop-details' ? 'active' : '' }}"><a href="{{ route('shop-details') }}">Détails Produit</a></li>
-                                    <li class="{{ Route::currentRouteName() == 'shoping-cart' ? 'active' : '' }}"><a href="{{ route('shoping-cart') }}">Panier</a></li>
+                                    <li class="{{ Route::currentRouteName() == 'shopping-cart' ? 'active' : '' }}"><a href="{{ route('shopping-cart') }}">Panier</a></li>
                                     <li class="{{ Route::currentRouteName() == 'checkout' ? 'active' : '' }}"><a href="{{ route('checkout') }}">Paiement</a></li>
                                     <li class="{{ Route::currentRouteName() == 'blog-details' ? 'active' : '' }}"><a href="{{ route('blog-details') }}">Blog Details</a></li>
                                 </ul>
-                            </li> --}}
-                            <li class="{{ Route::currentRouteName() == 'blog' ? 'active' : '' }}"><a href="{{ route('blog') }}">Blog</a></li>
+                            </li>
+                            <li class="{{ Route::currentRouteName() == 'blog' ? 'active' : '' }}"><a href="{{ route('blog') }}">Blog</a></li> --}}
                             <li class="{{ Route::currentRouteName() == 'contact' ? 'active' : '' }}"><a href="{{ route('contact') }}">Contact</a></li>
                         </ul>
                     </nav>
@@ -156,8 +185,8 @@
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>{{ count($wishlist['products']) }}</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>{{ count($cart['products']) }}</span></a></li>
+                            <li><a href="{{ route('wishlist') }}"><i class="fa fa-heart"></i> <span>{{ count($wishlist['products']) }}</span></a></li>
+                            <li><a href="{{ route('shopping-cart') }}"><i class="fa fa-shopping-bag"></i> <span>{{ count($cart['products']) }}</span></a></li>
                         </ul>
                         <div class="header__cart__price">Produits: <span>{{ $cart['amount'] }} FCFA</span></div>
                     </div>
@@ -172,7 +201,36 @@
 
     <!-- Hero Section Begin -->
     <section class="hero hero-normal">
+        @if ($devis_success)
         <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="checkout-msg alert alert-success alert-dismissible fade show mb-4" role="alert">
+                        <span class="message">{{ $devis_success }}</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+    @if ($service_success)
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="checkout-msg alert alert-success alert-dismissible fade show mb-4" role="alert">
+                        <span class="message">{{ $service_success }}</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    <div class="container">
             <div class="row">
                 <div class="col-lg-4">
                     <div class="hero__categories position-relative">
@@ -216,49 +274,37 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="{{ route('home') }}"><img src="{{ asset('front-office/img/logo.png') }}" alt=""></a>
+                            <a href="{{ route('home') }}"><img src="{{ asset('front-office/img/logo.svg') }}" alt=""></a>
                         </div>
                         <ul>
-                            <li>Adresse: Parakou </li>
-                            <li>Téléphone: +00229000000</li>
-                            <li>E-mail:electshop.com</li>
+                            <li><b><u>Adresse:</u></b> Quartier Gbira après KOBOUROU CITY, Parakou, BJ </li>
+                            <li><b><u>Téléphone:</u></b> +2296662549</li>
+                            <li><b><u>E-mail:</u></b> mountassirou41@gmail.com</li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
                     <div class="footer__widget">
-                        <h6>Useful Links</h6>
+                        <h6>Liens utiles</h6>
                         <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">About Our Shop</a></li>
-                            <li><a href="#">Secure Shopping</a></li>
-                            <li><a href="#">Delivery infomation</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Our Sitemap</a></li>
-                        </ul>
-                        <ul>
-                            <li><a href="#">Who We Are</a></li>
-                            <li><a href="#">Our Services</a></li>
-                            <li><a href="#">Projects</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">Innovation</a></li>
-                            <li><a href="#">Testimonials</a></li>
+                            <li><a href="{{ route('shop') }}">Boutique</a></li>
+                            <li><a href="{{ route('contact') }}">Contact</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-12">
                     <div class="footer__widget">
-                        <h6>Join Our Newsletter Now</h6>
-                        <p>Get E-mail updates about our latest shop and special offers.</p>
+                        <h6>S'inscrire à notre lettre d'information</h6>
+                        <p>Recevez des mises à jour par e-mail sur notre dernière boutique et nos offres spéciales.</p>
                         <form action="#">
-                            <input type="text" placeholder="Enter your mail">
-                            <button type="submit" class="site-btn">Subscribe</button>
+                            <input type="text" placeholder="Entrer votre e-mail">
+                            <button type="submit" class="site-btn">Souscrire</button>
                         </form>
                         <div class="footer__widget__social">
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-whatsapp"></i></a>
                             <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
                         </div>
                     </div>
                 </div>
@@ -266,12 +312,12 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="footer__copyright">
-                        <div class="footer__copyright__text">
+                        <div class="text-center">
                             <p>
                                 Copyright &copy;<script>document.write(new Date().getFullYear());</script> Tout droit réserver
                             </p>
                         </div>
-                        <div class="footer__copyright__payment"><img src="{{ asset('front-office/img/payment-item.png') }}" alt=""></div>
+                        {{-- <div class="footer__copyright__payment"><img src="{{ asset('front-office/img/payment-item.png') }}" alt=""></div> --}}
                     </div>
                 </div>
             </div>
@@ -279,8 +325,79 @@
     </footer>
     <!-- Footer Section End -->
 
+    <!-- Devis Modal -->
+    <div class="modal fade" id="devisModal" tabindex="-1" role="dialog" aria-labelledby="devisModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="devisModalLabel">Demander un devis</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('devis.create') }}">
+                        @csrf
+
+                        <div class="form-group">
+                            <label for="name">Nom</label>
+                            <input name="name" id="name" class="form-control" required value="{{ auth()->user() ? auth()->user()->first_name.' '. auth()->user()->last_name : '' }}" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="need">Téléphone</label>
+                            <input name="telephone" id="telephone" class="form-control" required value="{{ auth()->user() ? auth()->user()->telephone : '' }}" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="need">Décrivez votre besoin</label>
+                            <textarea name="need" id="need" rows="8" required class="form-control"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary font-weight-bold">Envoyer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Service Modal -->
+    <div class="modal fade" id="serviceModal" tabindex="-1" role="dialog" aria-labelledby="serviceModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="serviceModalLabel">Service</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('service.create') }}">
+                        @csrf
+
+                        <div class="form-group">
+                            <label for="name">Nom</label>
+                            <input name="name" id="name" class="form-control" required value="{{ auth()->user() ? auth()->user()->first_name.' '. auth()->user()->last_name : '' }}" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="need">Téléphone</label>
+                            <input name="telephone" id="telephone" class="form-control" required value="{{ auth()->user() ? auth()->user()->telephone : '' }}" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="need">En quoi pouvons-nous vous aider ?</label>
+                            <textarea name="need" id="need" rows="8" required class="form-control"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary font-weight-bold">Envoyer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Js Plugins -->
     <script src="{{ asset('front-office/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="{{ asset('front-office/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('front-office/js/jquery.nice-select.min.js') }}"></script>
     <script src="{{ asset('front-office/js/jquery-ui.min.js') }}"></script>

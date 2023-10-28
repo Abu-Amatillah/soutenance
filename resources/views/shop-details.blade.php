@@ -192,6 +192,28 @@
             window.cart = <?php echo json_encode($cart['products']); ?>;
             window.wishlist = <?php echo json_encode($wishlist['products']); ?>;
 
+            /*-------------------
+                Quantity change
+            --------------------- */
+            var proQty = $('.pro-qty');
+            proQty.prepend('<span class="dec qtybtn">-</span>');
+            proQty.append('<span class="inc qtybtn">+</span>');
+            proQty.on('click', '.qtybtn', function () {
+                var $button = $(this);
+                var oldValue = $button.parent().find('input').val();
+                if ($button.hasClass('inc')) {
+                    var newVal = parseFloat(oldValue) + 1;
+                } else {
+                    // Don't allow decrementing below zero
+                    if (oldValue > 0) {
+                        var newVal = parseFloat(oldValue) - 1;
+                    } else {
+                        newVal = 0;
+                    }
+                }
+                $button.parent().find('input').val(newVal);
+            });
+
             $('.toggle-product-to-cart').on('click', function(event) {
                 var cart = window.cart || [];
                 const index = cart.findIndex(object => {

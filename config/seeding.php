@@ -26,5 +26,6 @@ return [
             'name' => 'Disjoncteur',
             'image' => 'storage/categories/dij-4-pole.jfif'
         ],
-    ]
+    ],
+    "default_role_slug" => 'customer'
 ];

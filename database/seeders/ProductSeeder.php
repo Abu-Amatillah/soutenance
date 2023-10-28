@@ -129,7 +129,7 @@ class ProductSeeder extends Seeder
             ],
             [
                 'name'=> 'Batterie de 100am',
-                'image' => 'storage/products/batterie100.jfif',
+                'image' => 'storage/products/batterie100am.jfif',
                 'description'=> "Batterie de 100am ",
                 'information'=> 'Batteries accompagnant un panneaux....',
                 'quantity'=> 78548,
