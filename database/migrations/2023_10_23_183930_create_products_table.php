@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('image');
             $table->text('description');
             $table->text('information');
-            $table->bigInteger('quantity');
-            $table->bigInteger('price');
-            $table->double('weight');
+            $table->unsignedBigInteger('quantity');
+            $table->unsignedBigInteger('price');
+            $table->unsignedDouble('weight');
             $table->foreignIdFor(Category::class)->restrictOnUpdate()->restrictOnDelete();
             $table->timestamps();
         });

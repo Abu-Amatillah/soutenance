@@ -63,12 +63,22 @@ class Product extends Model
     }
 
     /**
-     * Get the user's first name.
+     * Get the product's average rating.
      */
     protected function averageRating(): Attribute
     {
         return Attribute::make(
             get: fn () => number_format($this->reviews()->average('rating'), 2),
+        );
+    }
+
+    /**
+     * Get the product's image.
+     */
+    protected function image(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => asset($value),
         );
     }
 }

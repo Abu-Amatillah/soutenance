@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->uuid('id');
             $table->foreignIdFor(User::class)->restrictOnUpdate()->restrictOnDelete();
-            $table->bigInteger('amount');
+            $table->unsignedBigInteger('amount');
             $table->enum('status', ['pending', 'processed', 'aborted'])->default('pending');
             $table->timestamps();
         });
@@ -26,8 +26,8 @@ return new class extends Migration
             $table->uuid('id');
             $table->foreignIdFor(Order::class)->restrictOnUpdate()->restrictOnDelete();
             $table->foreignIdFor(Product::class)->restrictOnUpdate()->restrictOnDelete();
-            $table->tinyInteger('quantity');
-            $table->bigInteger('amount');
+            $table->unsignedInteger('quantity');
+            $table->unsignedBigInteger('amount');
             $table->timestamps();
         });
     }

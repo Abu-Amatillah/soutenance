@@ -13,6 +13,8 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        Category::factory()->count(40)->create();
+        foreach (config('seeding.categories') as $category) {
+            Category::create($category);
+        }
     }
 }
