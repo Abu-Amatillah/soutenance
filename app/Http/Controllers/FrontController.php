@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactForm;
 use App\Mail\DevisRequested;
+use App\Mail\OrderValidated;
+use App\Mail\ServiceRequested;
+use App\Mail\UserOrderValidated;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -245,6 +249,8 @@ class FrontController extends Controller
                 'amount' => $item->quantity * $item->price,
             ]));
         }
+        Mail::to(config('mail.to.address'))->send(new OrderValidated(Order::with(['user', 'order_items', 'order_items.product'])->where('id', '=', $order->id)->first()));
+        Mail::to(auth()->user()->email)->send(new UserOrderValidated(Order::with(['user', 'order_items', 'order_items.product'])->where('id', '=', $order->id)->first()));
         session()->put(
             'cart',
             [
@@ -263,6 +269,7 @@ class FrontController extends Controller
     }
 
     public function save_service(Request $request) {
+        Mail::to(config('mail.to.address'))->send(new ServiceRequested($request->name, $request->telephone, $request->need));
         return redirect()->route('home')->with(['service_success' => 'Votre demande de service a été prise en compte. Nous vous contacterons dans un bref délai.', 'devis_success' => '']);
     }
 
@@ -289,8 +296,9 @@ class FrontController extends Controller
         $wishlist = session()->get('wishlist');
         if ($wishlist == null)
             $wishlist = ['products' => [], 'ids' => []];
+        Mail::to(config('mail.to.address'))->send(new ContactForm($request->name, $request->email, $request->message));
         $message = 'Votre message a été enregistré. Nous vous contacterons dans un bref délai.';
-        return view('contact', compact('wishlist', 'cart', 'message', 'devis_success', 'service_success'));
+        return view('contact', compact('wishlist', 'cart', 'message', 'devis_success', 'service_success', 'categories'));
     }
 
 }

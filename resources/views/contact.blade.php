@@ -1,5 +1,19 @@
 @extends('front-layout')
 @section('content')
+    @if ($message)
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="checkout-msg alert alert-success alert-dismissible fade show mb-4" role="alert">
+                        <span class="message">{{ $message }}</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="{{ asset('front-office/img/breadcrumb.jpg') }}">
         <div class="container">
@@ -77,7 +91,8 @@
                     </div>
                 </div>
             </div>
-            <form method="POST" action="#">
+            <form method="POST" action="{{ route('contact.create') }}">
+                @csrf
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <input name="name" value="{{ auth()->user() ? auth()->user()->first_name.' '. auth()->user()->last_name : '' }}" required type="text" placeholder="Votre nom complet">

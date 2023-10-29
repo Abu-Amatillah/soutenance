@@ -39,8 +39,8 @@
         </div>
         <div class="humberger__menu__cart">
             <ul>
-                <li><a href="{{ route('wishlist') }}"><i class="fa fa-heart"></i> <span>{{ count($wishlist['products']) }}</span></a></li>
-                <li><a href="{{ route('shopping-cart') }}"><i class="fa fa-shopping-bag"></i> <span>{{ count($cart['products']) }}</span></a></li>
+                <li><a class="cursor-pointer" href="{{ route('wishlist') }}"><i class="fa fa-heart"></i> <span>{{ count($wishlist['products']) }}</span></a></li>
+                <li><a class="cursor-pointer" href="{{ route('shopping-cart') }}"><i class="fa fa-shopping-bag"></i> <span>{{ count($cart['products']) }}</span></a></li>
             </ul>
             <div class="header__cart__price">Produits: <span>{{ $cart['amount'] }} FCFA</span></div>
         </div>
@@ -185,8 +185,8 @@
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="{{ route('wishlist') }}"><i class="fa fa-heart"></i> <span>{{ count($wishlist['products']) }}</span></a></li>
-                            <li><a href="{{ route('shopping-cart') }}"><i class="fa fa-shopping-bag"></i> <span>{{ count($cart['products']) }}</span></a></li>
+                            <li><a class="cursor-pointer" href="{{ route('wishlist') }}"><i class="fa fa-heart"></i> <span>{{ count($wishlist['products']) }}</span></a></li>
+                            <li><a class="cursor-pointer" href="{{ route('shopping-cart') }}"><i class="fa fa-shopping-bag"></i> <span>{{ count($cart['products']) }}</span></a></li>
                         </ul>
                         <div class="header__cart__price">Produits: <span>{{ $cart['amount'] }} FCFA</span></div>
                     </div>
@@ -202,33 +202,33 @@
     <!-- Hero Section Begin -->
     <section class="hero hero-normal">
         @if ($devis_success)
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="checkout-msg alert alert-success alert-dismissible fade show mb-4" role="alert">
-                        <span class="message">{{ $devis_success }}</span>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="checkout-msg alert alert-success alert-dismissible fade show mb-4" role="alert">
+                            <span class="message">{{ $devis_success }}</span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    @endif
-    @if ($service_success)
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="checkout-msg alert alert-success alert-dismissible fade show mb-4" role="alert">
-                        <span class="message">{{ $service_success }}</span>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
+        @endif
+        @if ($service_success)
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="checkout-msg alert alert-success alert-dismissible fade show mb-4" role="alert">
+                            <span class="message">{{ $service_success }}</span>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    @endif
+        @endif
 
     <div class="container">
             <div class="row">
