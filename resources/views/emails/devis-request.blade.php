@@ -12,38 +12,30 @@
             align-items: center;
             justify-content: center
         }
-
-        .content {
-            width: 75%;
-        }
-
-        img {
-            margin-bottom: 1.5rem;
-        }
     </style>
 </head>
 <body>
-<div class="container"></div>
-    <div class="content">
-        <img src="{{ asset('front-office/img/logo.svg') }}" alt="">
+    <div class="container">
+        <div class="content">
+            <img src="{{ asset('front-office/img/logo.svg') }}" alt="">
 
-        <p>Vous avez reçu une demande de devis. Ci-dessous les informations concernant cette demande:</p>
+            <p>Vous avez reçu une demande de devis. Ci-dessous les informations concernant cette demande:</p>
 
-        <div>
-            <p>
-                <b><ul>Nom:</ul></b>&nbsp;
-                {{ $name }}
-            </p>
-            <p>
-                <b><ul>Téléphone:</ul></b>&nbsp;
-                {{ $phone }}
-            </p>
-            <p>
-                <b><ul>Besoin:</ul></b>&nbsp;
-                {{ $need }}
-            </p>
+            <div>
+                <p>
+                    <b><u>Nom:</u></b>&nbsp;
+                    {{ $name }}
+                </p>
+                <p>
+                    <b><u>Téléphone:</u></b>&nbsp;
+                    {{ $phone }}
+                </p>
+                <p>
+                    <b><u>Besoin:</u></b>&nbsp;
+                    {{ $need }}
+                </p>
+            </div>
         </div>
     </div>
-</div>
 </body>
 </html>
